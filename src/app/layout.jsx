@@ -24,7 +24,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <header className="px-5 flex items-center justify-between gap-5 bg-stone-800">
-          <img src="/logo.webp" className="w-[100px]" alt="" />
+          <Link href="/">
+            <img src="/logo.webp" className="w-[100px]" alt="" />
+          </Link>
 
           <div className="space-x-5">
             <Link className="btn" href="/foods">
@@ -35,10 +37,7 @@ export default function RootLayout({ children }) {
             </Link>
           </div>
         </header>
-        <main className="px-5 py-8">
-          {children}
-        </main>
-        
+        <main className="px-5 py-8">{children}</main>
       </body>
     </html>
   );
