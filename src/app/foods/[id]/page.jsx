@@ -1,5 +1,9 @@
 import React from "react";
 
+export function generateStaticParams() {
+  return [{ id: '52774' }, { id: '53057' }, { id: '52928' }]
+}
+
 const getSingleFood = async (id) => {
     console.log(id)
   const res = await fetch(

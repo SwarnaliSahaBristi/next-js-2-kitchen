@@ -2,11 +2,12 @@ import React from "react";
 import FoodCard from "../components/cards/FoodCard";
 import CartItems from "./CartItems";
 
-import style from './foods.module.css'
+import style from "./foods.module.css";
 import InputSearch from "../components/InputSearch";
 const getFoods = async (search) => {
   const res = await fetch(
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`,
+    { next: { revalidate: 10 } },
   );
   const data = await res.json();
   await new Promise((resolve) => setTimeout(resolve, 3000));
