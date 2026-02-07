@@ -1,10 +1,10 @@
 import Link from "next/link";
 import CartButtons from "../buttons/CartButtons";
-
+import style from "@/app/foods/foods.module.css"
 const FoodCard = ({ food }) => {
   if (!food) return  null;
   return (
-    <div className="rounded-2xl bg-white shadow-md hover:shadow-xl transition overflow-hidden">
+    <div className={`rounded-2xl bg-white shadow-md hover:shadow-xl transition overflow-hidden ${style.bgred}`}>
       {/* Image */}
       <div className="h-44 w-full overflow-hidden">
         <img
@@ -28,7 +28,7 @@ const FoodCard = ({ food }) => {
 
         {/* Buttons */}
         <div className="flex gap-2 pt-2">
-          <CartButtons></CartButtons>
+          <CartButtons food={food}></CartButtons>
 
           <Link href={`/foods/${food.id}`}
             className="flex-1 rounded-xl border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition"

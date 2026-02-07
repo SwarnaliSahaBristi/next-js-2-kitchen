@@ -1,29 +1,37 @@
 import React from "react";
 import FoodCard from "../components/cards/FoodCard";
-const getFoods = async () => {
+import CartItems from "./CartItems";
+
+import style from './foods.module.css'
+import InputSearch from "../components/InputSearch";
+const getFoods = async (search) => {
   const res = await fetch(
-    "https://taxi-kitchen-api.vercel.app/api/v1/foods/random",
+    `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`,
   );
   const data = await res.json();
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return data.foods || [];
 };
-const FoodsPage = async () => {
-  const foods = await getFoods();
+const FoodsPage = async ({ searchParams }) => {
+  const { search = "" } = await searchParams;
+  const foods = await getFoods(search);
   return (
     <div>
-      <h2 className="text-4xl font-bold p-4">
+      <h2 className={`text-4xl font-bold p-4 ${style.bgred}`}>
         Total <span className="text-yellow-500">{foods.length}</span> Found
       </h2>
-
+      <div className="my-4">
+        <InputSearch></InputSearch>
+      </div>
       <div className="flex gap-5">
         <div className="grid my-5 grid-cols-3 gap-5">
           {foods.map((food) => (
             <FoodCard key={food.id} food={food}></FoodCard>
           ))}
-        </div> 
+        </div>
         <div className="w-[400px] border-2 rounded-xl p-4">
-            <h2 className="text-2xl font-bold text-center">Cart Items</h2> <hr />
+          <h2 className="text-2xl font-bold text-center">Cart Items</h2> <hr />
+          <CartItems></CartItems>
         </div>
       </div>
     </div>
