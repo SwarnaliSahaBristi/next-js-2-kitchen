@@ -13,6 +13,11 @@ const getFoods = async (search) => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return data.foods || [];
 };
+
+export const metadata = {
+  title: "All Foods",
+  description: "Best Fast Food In Narayanganj",
+};
 const FoodsPage = async ({ searchParams }) => {
   const { search = "" } = await searchParams;
   const foods = await getFoods(search);

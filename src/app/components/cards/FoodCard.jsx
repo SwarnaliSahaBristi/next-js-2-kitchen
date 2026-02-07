@@ -1,17 +1,23 @@
 import Link from "next/link";
 import CartButtons from "../buttons/CartButtons";
 import style from "@/app/foods/foods.module.css"
+import Image from "next/image";
 const FoodCard = ({ food }) => {
   if (!food) return  null;
   return (
     <div className={`rounded-2xl bg-white shadow-md hover:shadow-xl transition overflow-hidden ${style.bgred}`}>
       {/* Image */}
       <div className="h-44 w-full overflow-hidden">
-        <img
+        {/* <img
           src={food?.foodImg}
           alt={food?.title}
           className="h-full w-full object-cover hover:scale-105 transition"
-        />
+        /> */}
+        <Image src={food?.foodImg}
+          alt={food?.title}
+          className="h-full w-full object-cover hover:scale-105 transition"
+          width={300}
+          height={150}/>
       </div>
 
       {/* Content */}

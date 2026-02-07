@@ -1,11 +1,22 @@
 import React from "react";
 
 export function generateStaticParams() {
-  return [{ id: '52774' }, { id: '53057' }, { id: '52928' }]
+  return [{ id: "52774" }, { id: "53057" }, { id: "52928" }];
+}
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const res = await fetch(
+    `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`,
+    { cache: "no-store" },
+  );
+  const {details={}} = await res.json();
+  return{
+    title: details.title,
+  }
 }
 
 const getSingleFood = async (id) => {
-    console.log(id)
   const res = await fetch(
     `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`,
     { cache: "no-store" },
@@ -14,13 +25,12 @@ const getSingleFood = async (id) => {
   if (!res.ok) return null;
 
   const data = await res.json();
-  console.log(data)
   return data.details || data;
 };
 
 const page = async ({ params }) => {
   const { id } = await params;
-  console.log(id)
+  console.log(id);
   const food = await getSingleFood(id);
   console.log("Food:", food);
   if (!food) {
