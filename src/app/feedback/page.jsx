@@ -1,21 +1,24 @@
 import React from "react";
 import FeedbackCard from "../components/cards/FeedbackCard";
 import Link from "next/link";
+import { connect } from "../lib/dbConnect";
+import { getFeedback } from "@/action/server/feedback";
 export const metadata = {
   title: "Feedbacks",
 };
 
-const getFeedback = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback`,{
-    cache: "force-cache",
-    next:{revalidate:60}
-  });
-  return await res.json();
-};
+export const dynamic= "force-dynamic";
+// const getFeedback = async () => {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_server}/api/feedback`,{
+//     // cache: "force-cache",
+//     next:{revalidate:60}
+//   });
+//   return await res.json();
+// };
 
 const FeedbackPage = async () => {
   const feedback = await getFeedback();
-  console.log(feedback);
+  
   return (
     <div>
       <div>
